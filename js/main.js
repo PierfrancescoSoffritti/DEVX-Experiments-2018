@@ -1,45 +1,47 @@
-const canvas = document.getElementById("canvas");
+const canvas = document.getElementById("canvas")
+
+const loadingStepBarrier = new StepBarrier(2, begin)
 
 const eventBus = new EventBus()
-const sceneManager = new SceneManager(canvas);
+const sceneManager = new SceneManager(canvas)
+const domUIManager = new DomUIManager()
 
-bindEventListeners();
+cacheResources()
+bindEventListeners()
 
-let meshLoaded = false
+function onload() {
+    loadingStepBarrier.step()
+}
 
-// hack, used to cache the model
-const loader = new THREE.JSONLoader()
-loader.load('models/spaceship.json', function(playerGeometry, playerMaterials) { 
-	meshLoaded = true
+function cacheResources() {
+	const loader = new THREE.JSONLoader()
+	loader.load('models/spaceship.json', loadingStepBarrier.step)
+}
 
-    if(pageLoaded)
-        begin()
- })
-
- function begin() {
-	instructionsContainer.classList.remove("fade")
-	 render()
+ function begin() {	
+	domUIManager.showUI()
+	render()
  }
 
 function bindEventListeners() {
-	window.onresize = resizeCanvas;
-	window.onkeydown = onKeyDown;
-	window.onkeyup = onKeyUp;
-	window.onmousedown = onMouseDown;
-	window.onmouseup = onMouseUp;
-	window.oncontextmenu = event => event.preventDefault();
+	window.onresize = resizeCanvas
+	window.onkeydown = onKeyDown
+	window.onkeyup = onKeyUp
+	window.onmousedown = onMouseDown
+	window.onmouseup = onMouseUp
+	window.oncontextmenu = event => event.preventDefault()
 
-	resizeCanvas();	
+	resizeCanvas()
 }
 
 function resizeCanvas() {
-	canvas.style.width = '100%';
-	canvas.style.height= '100%';
+	canvas.style.width = '100%'
+	canvas.style.height= '100%'
 	
-	canvas.width  = canvas.offsetWidth;
-	canvas.height = canvas.offsetHeight;
+	canvas.width  = canvas.offsetWidth
+	canvas.height = canvas.offsetHeight
     
-    sceneManager.onWindowResize();
+    sceneManager.onWindowResize()
 }
 
 function onKeyDown(event) {
@@ -59,7 +61,7 @@ function onMouseUp(event) {
 }
 
 function render(time) {
-	requestAnimationFrame(render);
-	TWEEN.update(time);
-    sceneManager.update();
+	requestAnimationFrame(render)
+	TWEEN.update(time)
+    sceneManager.update()
 }
