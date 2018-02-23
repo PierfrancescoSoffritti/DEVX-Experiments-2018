@@ -16,8 +16,8 @@ function analyticsSendGameStartEvent() {
 	ga('send', 'game started');
 }
 
-function analyticsSendGameOverEvent() {
-	ga('send', 'game over');
+function analyticsSendGameOverEvent(score) {
+	ga('send', 'game over', 'score: ' +score);
 }
 
 function onload() {
