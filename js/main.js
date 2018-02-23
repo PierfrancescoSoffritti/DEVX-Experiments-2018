@@ -9,6 +9,17 @@ const domUIManager = new DomUIManager()
 cacheResources()
 bindEventListeners()
 
+eventBus.subscrie(startCountDownFinishedEvent, analyticsSendGameStartEvent)
+eventBus.subscrie(gameOverEvent, analyticsSendGameOverEvent)
+
+function analyticsSendGameStartEvent() {
+	ga('send', 'game started');
+}
+
+function analyticsSendGameOverEvent() {
+	ga('send', 'game over');
+}
+
 function onload() {
     loadingStepBarrier.step()
 }
