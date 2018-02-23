@@ -9,8 +9,8 @@ const domUIManager = new DomUIManager()
 cacheResources()
 bindEventListeners()
 
-eventBus.subscrie(startCountDownFinishedEvent, analyticsSendGameStartEvent)
-eventBus.subscrie(gameOverEvent, analyticsSendGameOverEvent)
+eventBus.subscribe(startCountDownFinishedEvent, analyticsSendGameStartEvent)
+eventBus.subscribe(gameOverEvent, analyticsSendGameOverEvent)
 
 function analyticsSendGameStartEvent() {
 	ga('send', 'game started');
