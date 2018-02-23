@@ -13,11 +13,20 @@ eventBus.subscribe(startCountDownFinishedEvent, analyticsSendGameStartEvent)
 eventBus.subscribe(gameOverEvent, analyticsSendGameOverEvent)
 
 function analyticsSendGameStartEvent() {
-	ga('send', 'game started');
+	ga('send', {
+		hitType: 'event',
+		eventCategory: 'gameplay',
+		eventAction: 'game started',
+	  });
 }
 
 function analyticsSendGameOverEvent(score) {
-	ga('send', 'game over', 'score: ' +score);
+	ga('send', {
+		hitType: 'event',
+		eventCategory: 'gameplay',
+		eventAction: 'game over: ' +score,
+		
+	  });
 }
 
 function onload() {
